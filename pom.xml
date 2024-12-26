@@ -30,6 +30,13 @@
         <java.version>21</java.version>
     </properties>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/me.paulschwarz/spring-dotenv -->
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>dotenv-java</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <!-- continue -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -47,6 +54,7 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
+            <!-- Necesito poner la version en la parte final: -->
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

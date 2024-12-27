@@ -11,8 +11,9 @@ public class Profiles {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_profile")
     private int id_profile;
-    @Column(name = "id_user")
-    private int id_user;
+    @OneToOne
+    @JoinColumn(name = "id_user",referencedColumnName = "id_user")
+    private Users id_user;
     @Column(name = "first_name",nullable = false)
     private String first_name;
     @Column(name = "last_name",nullable = false)

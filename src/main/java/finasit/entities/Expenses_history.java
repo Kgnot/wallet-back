@@ -1,8 +1,11 @@
 package finasit.entities;
 
 
+import finasit.entities.transaction.Transaction;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Expenses_history")
@@ -14,11 +17,17 @@ public class Expenses_history {
     @Column(name = "id_expense_history")
     private int id_expense_history;
 
-    @Column(name = "id_expense")
-    private int id_expense;
+    @ManyToOne
+    @JoinColumn(name = "id_expense")
+    private Expenses id_expense;
 
-    @Column(name = "id_expense_type")
-    private int id_expense_type;
+    @ManyToOne
+    @JoinColumn(name = "id_expense_type")
+    private Expenses_types id_expense_type;
 
+
+    //One to Many
+    @OneToMany(mappedBy = "id_expense_history")
+    private List<Transaction> transactions;
 
 }

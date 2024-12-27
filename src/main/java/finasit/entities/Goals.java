@@ -3,6 +3,7 @@ package finasit.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.sql.Date;
 
 @Entity
@@ -14,12 +15,16 @@ public class Goals {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_goal")
     private int id_goal;
-    @Column(name = "id_user")
-    private int id_user;
-    @Column(name="date")
+    @Column(name = "date")
     private Date date;
-    @Column(name="id_goal_type")
-    private int id_goal_type;
+    //    Relation many to one:
+    @ManyToOne
+    @JoinColumn(name = "id_goal_type", nullable = false)
+    private Goals_types id_goal_type;
+    @ManyToOne
+    @JoinColumn(name="id_user",nullable = false)
+    private Users id_user;
+
 
 
 }

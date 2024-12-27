@@ -1,8 +1,11 @@
 package finasit.entities;
 
 
+import finasit.entities.transaction.Transaction;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Denominations")
@@ -16,4 +19,8 @@ public class Denominations {
 
     @Column(name = "denomination", length = 10,nullable = false)
     private String denomination;
+
+    //OTM
+    @OneToMany(mappedBy = "id_denomination")
+    private List<Transaction> transactions;
 }

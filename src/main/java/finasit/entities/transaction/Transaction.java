@@ -1,6 +1,7 @@
 package finasit.entities.transaction;
 
 
+import finasit.entities.*;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,10 +15,12 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_transaction")
     private int id_transaction;
-    @Column(name = "id_expenses_history")
-    private String id_expenses_history;
-    @Column(name = "id_incomes_history")
-    private String id_incomes_history;
+    @ManyToOne
+    @JoinColumn(name = "id_expense_history",nullable = false)
+    private Expenses_history id_expense_history;
+    @ManyToOne
+    @JoinColumn(name = "id_income_history")
+    private Incomes_history id_income_history;
     @Column(name = "value")
     private double value;
     @Column(name = "id_denomination")
@@ -28,11 +31,14 @@ public class Transaction {
     private int month;
     @Column(name = "year")
     private int year;
-    @Column(name = "id_wallet")
-    private int id_wallet;
-    @Column(name = "id_user")
-    private int id_user;
-    @Column(name = "id_mood")
-    private int id_mood;
+    @ManyToOne
+    @JoinColumn(name = "id_wallet",nullable = false)
+    private Wallets id_wallet;
+    @ManyToOne
+    @JoinColumn(name = "id_user",nullable = false)
+    private Users id_user;
+    @ManyToOne
+    @JoinColumn(name = "id_mood",nullable = false)
+    private Moods id_mood;
 
 }

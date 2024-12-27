@@ -1,7 +1,11 @@
 package finasit.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import finasit.entities.transaction.Transaction;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Wallets")
@@ -15,4 +19,11 @@ public class Wallets {
     private String wallet_type;
     @Column(name = "wallet_img_url")
     private String wallet_img_url;
+    // One to many
+    @OneToMany(mappedBy = "id_wallet")
+    @JsonIgnore
+    private List<Balances> balances;
+    @OneToMany(mappedBy = "id_wallet")
+    private List<Transaction> transactions;
+
 }

@@ -1,8 +1,11 @@
 package finasit.entities;
 
 
+import finasit.entities.transaction.Transaction;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Incomes_history")
@@ -13,9 +16,15 @@ public class Incomes_history {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_income_history")
     private int id_income_history;
-    @Column(name = "id_income")
-    private int id_income;
-    @Column(name="id_income_type")
-    private int id_income_type;
+    @ManyToOne
+    @JoinColumn(name = "id_income",nullable = false)
+    private Incomes id_income;
+    @ManyToOne
+    @JoinColumn(name = "id_income_type",nullable = false)
+    private Incomes_types id_income_type;
+
+    // OTM
+    @OneToMany(mappedBy = "id_income_history")
+    private List<Transaction> transactions;
 
 }

@@ -47,9 +47,9 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public void save(Users user_rq) {
-        Users user = UsersMapper.getInstance().toEntity(user_rq);
-        repository.save(user);
+    public Users save(Users user_rq) {
+        Users user = UsersMapper.getInstance().toEntity(user_rq); // esto básicamente encripta
+        return repository.save(user);
     }
 
     @Override

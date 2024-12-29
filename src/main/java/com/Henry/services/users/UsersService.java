@@ -12,11 +12,8 @@ public interface UsersService {
     // lo que si sirve:
 
     Users findById(int id);
-
-    void save(Users user);
-
+    Users save(Users user);
     Users deleteById(int id);
-
     Users findByEmail(String email);
 
 }

@@ -46,6 +46,4 @@ public class Users {
         this.email = email;
         this.password = password;
     }
-
-
 }

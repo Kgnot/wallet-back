@@ -1,11 +1,14 @@
 package com.Henry.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
 @Table(name = "Profiles")
 @Data
+@Builder
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Profiles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +21,7 @@ public class Profiles {
     private String first_name;
     @Column(name = "last_name",nullable = false)
     private String last_name;
-    @Column(name = "img",nullable = false)
+    @Column(name = "img")
     private String img;
     @Column(name = "description")
     private String description;

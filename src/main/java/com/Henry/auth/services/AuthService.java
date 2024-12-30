@@ -1,5 +1,6 @@
 package com.Henry.auth.services;
 
+import com.Henry.auth.services.RegisterBuilder.Register;
 import com.Henry.auth.utils.AuthResponse;
 import com.Henry.auth.utils.LoginRequest;
 import com.Henry.auth.utils.RegisterRequest;
@@ -18,8 +19,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final UsersService usersService;
-    private final ProfilesService profilesService;
+    private final Register register;
     private final JwtService jwtService;
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationManager authenticationManager;
@@ -37,24 +37,9 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest request) {
-        // NO OLVIDAR AÑADDIR QUE SI NO SE CRA EL PERFIL ELIMINAR EL USUARIO, MANEJAR ESE ERROR :CCC
-        Users user = Users.builder()
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .nickname(request.getNickname())
-                .build();
-
-        user = usersService.save(user);
-
-        Profiles profile = Profiles.builder()
-                .first_name(request.getFirstName())
-                .last_name(request.getLastName())
-                .id_user(user)
-                .build();
-        profilesService.save(profile);
-
-        // Parte adicional que no está en el video pero lo hago para colocarlo
-        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
+        register.register(request);
+        String email = register.getUser().getEmail();
+        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
         return AuthResponse.builder()
                 .token(jwtService.getToken(userDetails))

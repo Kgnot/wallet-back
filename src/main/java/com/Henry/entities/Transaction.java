@@ -34,7 +34,7 @@ public class Transaction {
     private Wallets id_wallet;
     @ManyToOne
     @JoinColumn(name = "id_user",nullable = false)
-    private Users id_user;
+    private Users user;
     @ManyToOne
     @JoinColumn(name = "id_mood",nullable = false)
     private Moods id_mood;

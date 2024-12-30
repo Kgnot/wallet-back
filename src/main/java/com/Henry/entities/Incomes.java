@@ -22,7 +22,7 @@ public class Incomes {
     private int id_income;
     @ManyToOne
     @JoinColumn(name = "id_user",nullable = false)
-    private Users id_user;
+    private Users user;
     @Column(name = "type",nullable = false)
     private String type;
 

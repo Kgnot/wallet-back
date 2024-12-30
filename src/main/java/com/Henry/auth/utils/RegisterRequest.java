@@ -1,7 +1,9 @@
 package com.Henry.auth.utils;
 
 
+import com.Henry.entities.Balances;
 import com.Henry.entities.Expenses;
+import com.Henry.entities.Incomes;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +22,8 @@ public class RegisterRequest {
     String firstName;
     String lastName;
     String description;
-    // También quiere añadir lo que son los Expenses e Incomes:
+    // También quiere añadir lo que son los Expenses, incomes y balances:
     List<Expenses> expenses;
+    List<Incomes> incomes;
+    List<Balances> balances;
 }

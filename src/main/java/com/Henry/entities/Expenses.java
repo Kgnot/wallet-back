@@ -22,7 +22,7 @@ public class Expenses {
     private int id_expense;
     @ManyToOne
     @JoinColumn(name = "id_user")
-    private Users id_user;
+    private Users user;
     @Column(name = "type")
     private String type;
     // relations one to many :

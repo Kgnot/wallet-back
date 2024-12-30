@@ -24,15 +24,15 @@ public class Users {
     private String password;
 
     //    Relation One to Many
-    @OneToMany(mappedBy = "id_user")
+    @OneToMany(mappedBy = "user")
     private List<Goals> goals;
-    @OneToMany(mappedBy = "id_user")
+    @OneToMany(mappedBy = "user")
     private List<Expenses> expenses;
-    @OneToMany(mappedBy = "id_user")
+    @OneToMany(mappedBy = "user")
     private List<Balances> balances;
-    @OneToMany(mappedBy = "id_user")
+    @OneToMany(mappedBy = "user")
     private List<Incomes> incomes;
-    @OneToMany(mappedBy = "id_user")
+    @OneToMany(mappedBy = "user")
     private List<Transaction> transactions;
     //    One to One
     @OneToOne(mappedBy = "id_user")

@@ -37,6 +37,7 @@ public class SignInBuilderTotal extends SignInBuilder {
         this.incomesService = incomesService;
         this.balancesService = balancesService;
     }
+
     @Override
     public SignInBuilder setRequest(RegisterRequest request) {
         this.request = request;
@@ -73,34 +74,47 @@ public class SignInBuilderTotal extends SignInBuilder {
 
     @Override
     public SignInBuilder buildIncome() {
-        userRegister.setIncome(
-                Incomes.builder()
-                        .id_user(userRegister.getUser())
-                        .build()
-        );
-        incomesService.save(userRegister.getIncome());
+        //debo crear tantos incomes como me haya pasado, entonces:
+        request.getIncomes().forEach(income -> {
+            userRegister.setIncome(
+                    Incomes.builder()
+                            .user(userRegister.getUser())
+                            .type(income.getType())
+                            .build()
+            );
+            incomesService.save(userRegister.getIncome());
+        });
         return this;
     }
 
     @Override
     public SignInBuilder buildExpense() {
-        userRegister.setExpense(
-                Expenses.builder()
-                        .id_user(userRegister.getUser())
-                        .build()
-        );
-        expensesService.save(userRegister.getExpense());
+        request.getExpenses().forEach(expense -> {
+            userRegister.setExpense(
+                    Expenses.builder()
+                            .user(userRegister.getUser())
+                            .type(expense.getType())
+                            .build()
+            );
+            expensesService.save(userRegister.getExpense());
+        });
         return this;
     }
 
     @Override
     public SignInBuilder buildBalance() {
-        userRegister.setBalance(
-                Balances.builder()
-                        .id_user(userRegister.getUser())
-                        .build()
-        );
-        balancesService.save(userRegister.getBalance(), userRegister.getUser());
+
+        request.getBalances().forEach(balances -> {
+            userRegister.setBalance(
+                    Balances.builder()
+                            .user(userRegister.getUser())
+                            .id_wallet(balances.getId_wallet())
+                            .amount(balances.getAmount())
+                            .build()
+            );
+            balancesService.save(userRegister.getBalance());
+        });
+
         return this;
     }
 

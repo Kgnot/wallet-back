@@ -22,7 +22,7 @@ public class Goals {
     private Goals_types id_goal_type;
     @ManyToOne
     @JoinColumn(name="id_user",nullable = false)
-    private Users id_user;
+    private Users user;
 
 
 

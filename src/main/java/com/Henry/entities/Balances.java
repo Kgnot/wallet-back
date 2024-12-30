@@ -20,7 +20,7 @@ public class Balances {
     private int id_balance;
     @ManyToOne
     @JoinColumn(name = "id_user",nullable = false)
-    private Users id_user;
+    private Users user;
     @ManyToOne
     @JoinColumn(name = "id_wallet",nullable = false)
     private Wallets id_wallet;

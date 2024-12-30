@@ -2,7 +2,6 @@ package com.Henry.services.balances;
 
 import com.Henry.dao.balances.BalancesRepository;
 import com.Henry.entities.Balances;
-import com.Henry.entities.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +14,12 @@ public class BalancesServiceImpl implements BalancesService{
     private final BalancesRepository repository;
 
     @Override
-    public List<Balances> findByUserId(Integer userId) {
-        return repository.findByUsersId(userId);
+    public List<Balances> findByUserEmail(String email) {
+        return repository.findByUserEmail(email);
     }
 
     @Override
-    public Balances save(Balances balance, Users user) {
-        return repository.save(balance, user);
+    public Balances save(Balances balance) {
+        return repository.save(balance);
     }
 }

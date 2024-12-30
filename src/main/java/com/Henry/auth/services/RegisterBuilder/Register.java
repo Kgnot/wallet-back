@@ -1,8 +1,7 @@
 package com.Henry.auth.services.RegisterBuilder;
 
-
-import com.Henry.auth.services.RegisterBuilder.builders.SignInBuilderTotal;
 import com.Henry.auth.utils.RegisterRequest;
+import com.Henry.entities.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +18,10 @@ public class Register {
                .buildIncome()
                .buildExpense()
                .buildBalance();
+   }
+
+   public Users getUser(){
+       return signInBuilder.getUser();
    }
 
 }

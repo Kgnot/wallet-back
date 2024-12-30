@@ -16,7 +16,7 @@ public class Expenses_types {
     @Column(name="id_expense_type")
     private int id_expense_type;
 
-    @Column(name="type", nullable = false , length = 255)
+    @Column(name="type", nullable = false)
     private String type;
 
     // one to many :

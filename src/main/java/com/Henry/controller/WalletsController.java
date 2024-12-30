@@ -5,6 +5,7 @@ package com.Henry.controller;
 import com.Henry.entities.Wallets;
 import com.Henry.services.wallets.WalletsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,8 +18,8 @@ public class WalletsController {
 
     private final WalletsService service;
 
-
-    public List<Wallets> findAll(){
+    @GetMapping
+    public List<Wallets> findAll() {
         return service.findAll();
     }
 

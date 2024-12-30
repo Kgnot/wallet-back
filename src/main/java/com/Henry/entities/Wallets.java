@@ -27,6 +27,7 @@ public class Wallets {
     @JsonIgnore
     private List<Balances> balances;
     @OneToMany(mappedBy = "wallet")
+    @JsonIgnore
     private List<Transaction> transactions;
 
 }

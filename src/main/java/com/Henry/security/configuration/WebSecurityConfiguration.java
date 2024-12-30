@@ -29,6 +29,7 @@ public class WebSecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable) // reemplazando a 'csrf -> csrf.disable()' que es lo que se coloca de normal
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/**",
+                                "/wallets/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html").permitAll() // decimos que lo que tiene que ver con auth -> login | sign in : No necesita autenticación.

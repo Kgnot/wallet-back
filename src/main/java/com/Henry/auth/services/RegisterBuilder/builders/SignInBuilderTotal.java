@@ -65,7 +65,7 @@ public class SignInBuilderTotal extends SignInBuilder {
                 Profiles.builder()
                         .first_name(request.getFirstName())
                         .last_name(request.getLastName())
-                        .id_user(userRegister.getUser())
+                        .user(userRegister.getUser())
                         .build()
         );
         profileService.save(userRegister.getProfile());
@@ -108,7 +108,7 @@ public class SignInBuilderTotal extends SignInBuilder {
             userRegister.setBalance(
                     Balances.builder()
                             .user(userRegister.getUser())
-                            .id_wallet(balances.getId_wallet())
+                            .wallet(balances.getWallet())
                             .amount(balances.getAmount())
                             .build()
             );

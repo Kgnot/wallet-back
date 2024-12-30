@@ -20,7 +20,7 @@ public class Expenses_types {
     private String type;
 
     // one to many :
-    @OneToMany(mappedBy = "id_expense_type")
+    @OneToMany(mappedBy = "expenseType")
     @JsonIgnore // we'll not use it
     private List<Expenses_history> histories;
 

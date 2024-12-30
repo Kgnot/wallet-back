@@ -17,15 +17,15 @@ public class Expenses_history {
 
     @ManyToOne
     @JoinColumn(name = "id_expense")
-    private Expenses id_expense;
+    private Expenses expense;
 
     @ManyToOne
     @JoinColumn(name = "id_expense_type")
-    private Expenses_types id_expense_type;
+    private Expenses_types expenseType;
 
 
     //One to Many
-    @OneToMany(mappedBy = "id_expense_history")
+    @OneToMany(mappedBy = "expenseHistory")
     private List<Transaction> transactions;
 
 }

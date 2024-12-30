@@ -23,7 +23,7 @@ public class Balances {
     private Users user;
     @ManyToOne
     @JoinColumn(name = "id_wallet",nullable = false)
-    private Wallets id_wallet;
+    private Wallets wallet;
     @Column(name="amount",nullable = false)
     private double amount;
 

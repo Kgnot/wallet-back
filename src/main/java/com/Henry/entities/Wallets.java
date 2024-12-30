@@ -23,10 +23,10 @@ public class Wallets {
     @Column(name = "wallet_img_url")
     private String wallet_img_url;
     // One to many
-    @OneToMany(mappedBy = "id_wallet")
+    @OneToMany(mappedBy = "wallet")
     @JsonIgnore
     private List<Balances> balances;
-    @OneToMany(mappedBy = "id_wallet")
+    @OneToMany(mappedBy = "wallet")
     private List<Transaction> transactions;
 
 }

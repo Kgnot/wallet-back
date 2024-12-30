@@ -15,14 +15,15 @@ public class Transaction {
     private int id_transaction;
     @ManyToOne
     @JoinColumn(name = "id_expense_history",nullable = false)
-    private Expenses_history id_expense_history;
+    private Expenses_history expenseHistory;
     @ManyToOne
     @JoinColumn(name = "id_income_history")
-    private Incomes_history id_income_history;
+    private Incomes_history incomeHistory;
     @Column(name = "value")
     private double value;
-    @Column(name = "id_denomination")
-    private int id_denomination;
+    @ManyToOne
+    @JoinColumn(name = "id_denomination")
+    private Denominations denominations;
     @Column(name = "date")
     private Date date;
     @Column(name = "month")
@@ -31,12 +32,12 @@ public class Transaction {
     private int year;
     @ManyToOne
     @JoinColumn(name = "id_wallet",nullable = false)
-    private Wallets id_wallet;
+    private Wallets wallet;
     @ManyToOne
     @JoinColumn(name = "id_user",nullable = false)
     private Users user;
     @ManyToOne
     @JoinColumn(name = "id_mood",nullable = false)
-    private Moods id_mood;
+    private Moods mood;
 
 }

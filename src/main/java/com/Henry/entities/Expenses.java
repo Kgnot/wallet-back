@@ -26,7 +26,7 @@ public class Expenses {
     @Column(name = "type")
     private String type;
     // relations one to many :
-    @OneToMany(mappedBy = "id_expense")
+    @OneToMany(mappedBy = "expense")
     private List<Expenses_history> histories;
 
 }

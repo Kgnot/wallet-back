@@ -18,7 +18,7 @@ public class Incomes_types {
     @Column(name = "type")
     private String type;
     //one to many:
-    @OneToMany(mappedBy = "id_income_type")
+    @OneToMany(mappedBy = "incomeType")
     @JsonIgnore // Posiblemente haremos manage referenced
     private List<Incomes_history> histories;
 }

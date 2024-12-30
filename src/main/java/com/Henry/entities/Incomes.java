@@ -27,7 +27,7 @@ public class Incomes {
     private String type;
 
     // One to Many
-    @OneToMany(mappedBy = "id_income")
+    @OneToMany(mappedBy = "incomes")
     private List<Incomes_history> histories;
 
 }

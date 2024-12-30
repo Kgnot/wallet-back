@@ -19,7 +19,7 @@ public class Moods {
     private int valuation;
 
     // OTM
-    @OneToMany(mappedBy = "id_mood")
+    @OneToMany(mappedBy = "mood")
     private List<Transaction> transactions;
 
 }

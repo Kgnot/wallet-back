@@ -19,7 +19,7 @@ public class Denominations {
     private String denomination;
 
     //OTM
-    @OneToMany(mappedBy = "id_denomination")
+    @OneToMany(mappedBy = "denominations")
     private List<Transaction> transactions;
 }
 

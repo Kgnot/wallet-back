@@ -35,7 +35,7 @@ public class Users {
     @OneToMany(mappedBy = "user")
     private List<Transaction> transactions;
     //    One to One
-    @OneToOne(mappedBy = "id_user")
+    @OneToOne(mappedBy = "user")
     private Profiles profile;
 
     /* Constructor*/

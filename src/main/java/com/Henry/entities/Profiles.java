@@ -16,7 +16,7 @@ public class Profiles {
     private int id_profile;
     @OneToOne
     @JoinColumn(name = "id_user",referencedColumnName = "id_user")
-    private Users id_user;
+    private Users user;
     @Column(name = "first_name",nullable = false)
     private String first_name;
     @Column(name = "last_name",nullable = false)

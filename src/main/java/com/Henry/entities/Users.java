@@ -31,8 +31,6 @@ public class Users {
     @OneToMany(mappedBy = "id_user")
     private List<Balances> balances;
     @OneToMany(mappedBy = "id_user")
-    private List<Moods> moods;
-    @OneToMany(mappedBy = "id_user")
     private List<Incomes> incomes;
     @OneToMany(mappedBy = "id_user")
     private List<Transaction> transactions;

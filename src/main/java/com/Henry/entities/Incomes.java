@@ -1,19 +1,25 @@
 package com.Henry.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "Incomes")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Incomes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_incomes")
-    private int id_incomes;
+    @Column(name = "id_income")
+    private int id_income;
     @ManyToOne
     @JoinColumn(name = "id_user",nullable = false)
     private Users id_user;
@@ -23,6 +29,5 @@ public class Incomes {
     // One to Many
     @OneToMany(mappedBy = "id_income")
     private List<Incomes_history> histories;
-
 
 }

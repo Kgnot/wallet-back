@@ -1,10 +1,16 @@
 package com.Henry.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "balances")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Balances {
 

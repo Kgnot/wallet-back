@@ -13,9 +13,6 @@ public class Moods {
     @Column(name = "id_mood")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_mood;
-    @ManyToOne
-    @JoinColumn(name = "id_user",nullable = false)
-    private Users id_user;
     @Column(name = "type")
     private String type;
     @Column(name = "valuation", nullable = false)

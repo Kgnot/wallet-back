@@ -13,7 +13,7 @@ public class FinasitApplication {
 
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.configure()
-                .filename(".env.db")
+                .filename(".env")
                 .load();
 
         dotenv.entries().forEach(e -> System.setProperty(e.getKey(), e.getValue()));

@@ -16,8 +16,5 @@ jwt:
   secret:
     key: ${JWT_SECRET_KEY}
 
-
-#logging:
-#  level:
-#    org:
-#      springframework : DEBUG
+server:
+  port: 80

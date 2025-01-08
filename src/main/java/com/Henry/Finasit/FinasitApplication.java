@@ -1,6 +1,6 @@
 package com.Henry.Finasit;
 
-//import io.github.cdimascio.dotenv.Dotenv;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -12,13 +12,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class FinasitApplication {
 
     public static void main(String[] args) {
-//        Dotenv dotenv = Dotenv.configure()
-//                .filename(".env")
-//                .load();
-//
-//        dotenv.entries().forEach(e -> System.setProperty(e.getKey(), e.getValue()));
-// Eso solo sirve para el entorno de desarrollo, en producción no se debe de hacer eso.
+        Dotenv dotenv = Dotenv.configure()
+                .filename(".env")
+                .load();
 
+        dotenv.entries().forEach(e -> System.setProperty(e.getKey(), e.getValue()));
+    // No agregar a entorno de producción
 
         SpringApplication.run(FinasitApplication.class, args);
     }

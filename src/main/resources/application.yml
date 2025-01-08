@@ -20,4 +20,7 @@ jwt:
 #logging:
 #  level:
 #    org:
-#      springframework : DEBUG
+#      springframework:
+#        boot : ERROR
+#        web: ERROR
+#      hibernate: ERROR

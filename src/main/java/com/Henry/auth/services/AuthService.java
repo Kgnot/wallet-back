@@ -26,13 +26,13 @@ public class AuthService {
 
     //Aquí estámos creando el usuario, entonces:
     public AuthResponse login(LoginRequest request) {
-
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-
-
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         System.out.println(userDetails);
         String token = jwtService.getToken(userDetails);
+        String refreshToken = jwtService.generateRefreshToken(userDetails);
+
+
 
         return AuthResponse.builder()
                 .token(token)
@@ -43,9 +43,9 @@ public class AuthService {
         register.register(request);
         String email = register.getUser().getEmail();
         UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-        System.out.println("de parte de autservice register: "+userDetails);
         return AuthResponse.builder()
                 .token(jwtService.getToken(userDetails))
+                .refreshToken(jwtService.generateRefreshToken(userDetails))
                 .build();
     }
 }

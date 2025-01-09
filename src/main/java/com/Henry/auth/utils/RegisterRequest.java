@@ -22,6 +22,7 @@ public class RegisterRequest {
     String firstName;
     String lastName;
     String description;
+    String img;
     // También quiere añadir lo que son los Expenses, incomes y balances:
     List<Expenses> expenses;
     List<Incomes> incomes;

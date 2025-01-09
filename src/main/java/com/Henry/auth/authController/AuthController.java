@@ -5,26 +5,76 @@ import com.Henry.auth.services.AuthService;
 import com.Henry.auth.utils.AuthResponse;
 import com.Henry.auth.utils.LoginRequest;
 import com.Henry.auth.utils.RegisterRequest;
+import com.Henry.security.util.CookieUtil;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.WebUtils;
 
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
+    private final CookieUtil cookieUtil;
+
+    /* Apartado de autenticación em cookies : */
+    @Value("${jwt.cookie.expiration}")
+    private int exp;
+    @Value("${domain}")
+    private String domain;
+    @Value("${jwt.cookie.name}")
+    private String cookieName;
 
     @PostMapping("login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-        return ResponseEntity.ok(authService.login(request));
+    public ResponseEntity<?> login(@RequestBody LoginRequest request, HttpServletResponse response) {
+        String jwt = authService.login(request).getToken();
+        // Aquí creamos el cookie:
+        cookieUtil.create(
+                response,
+                jwt,
+                cookieName,
+                domain,
+                exp,
+                true
+        );
+        return ResponseEntity.ok().body("{\"message\": \"login successful\"}");
     }
 
     @PostMapping("register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authService.register(request));
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request, HttpServletResponse response) {
+        String jwt = authService.register(request).getToken();
+        cookieUtil.create(
+                response,
+                jwt,
+                cookieName,
+                domain,
+                exp,
+                true);
+        return ResponseEntity.ok().body("{\"message\": \"sign in successful\"}");
+    } // Estó también toca cambiarlo.
+
+    @GetMapping("check-auth")
+    public boolean checkAuth(HttpServletRequest request) {
+        return isCookiePresent(request);//? ResponseEntity.ok("Authenticated") : ResponseEntity.status(401).body("Not Authenticated")
     }
+
+    @GetMapping("logout")
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        cookieUtil.clear(response, cookieName);
+
+        return ResponseEntity.ok().body("\"message:\": \"Logout\" ");
+    }
+
+
+    private boolean isCookiePresent(HttpServletRequest response) {
+        Cookie cookie = WebUtils.getCookie(response, cookieName);
+        return cookie == null ? false : true;
+    }
+
+
 }

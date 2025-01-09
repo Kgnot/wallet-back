@@ -66,6 +66,7 @@ public class SignInBuilderTotal extends SignInBuilder {
                         .first_name(request.getFirstName())
                         .last_name(request.getLastName())
                         .user(userRegister.getUser())
+                        .img(request.getImg())
                         .build()
         );
         profileService.save(userRegister.getProfile());

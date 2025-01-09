@@ -1,5 +1,6 @@
 package com.Henry.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,7 @@ public class Users {
 
     //    Relation One to Many
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<Goals> goals;
     @OneToMany(mappedBy = "user")
     private List<Expenses> expenses;
@@ -36,6 +38,7 @@ public class Users {
     private List<Transaction> transactions;
     //    One to One
     @OneToOne(mappedBy = "user")
+    @JsonManagedReference
     private Profiles profile;
 
     /* Constructor*/

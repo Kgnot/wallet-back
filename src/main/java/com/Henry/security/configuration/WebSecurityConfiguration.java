@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -26,7 +27,8 @@ public class WebSecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable) // reemplazando a 'csrf -> csrf.disable()' que es lo que se coloca de normal
+                .csrf(AbstractHttpConfigurer::disable) // reemplazando a 'csrf -> csrf.disable()' que es lo que se coloca de normal |  y mirar porque uso tokens y ayudaria contra ataques CSRF
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/**",
                                 "/wallets/**",

@@ -1,5 +1,6 @@
 package com.Henry.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,8 +23,6 @@ public class Goals {
     private Goals_types id_goal_type;
     @ManyToOne
     @JoinColumn(name="id_user",nullable = false)
+    @JsonBackReference
     private Users user;
-
-
-
 }

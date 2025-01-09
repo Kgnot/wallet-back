@@ -22,7 +22,10 @@ public class JwtService {
 
     @Value("${jwt.secret.key}")
     private String SECRET_KEY;
-
+    @Value("${jwt.refresh-token.expiration}")
+    private long refreshExpiration;
+    @Value("${jwt.expiration}")
+    private long jwtExpiration;
     public String getToken(UserDetails user) {
         return getToken(new HashMap<>(),user);
     }
@@ -33,10 +36,17 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(user.getUsername()) // no olvidar que el username es el email xd
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+1000*60*24))
+                .setExpiration(new Date(System.currentTimeMillis()+jwtExpiration))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
+
+    public String generateRefreshToken(
+            UserDetails userDetails
+    ) {
+        return buildToken(new HashMap<>(), userDetails, refreshExpiration);
+    }
+
 
     private Key getKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
@@ -70,6 +80,20 @@ public class JwtService {
     }
     private boolean isTokenExpired(String token){
         return getExpiration(token).before(new Date());
+    }
+    private String buildToken(
+            Map<String, Object> extraClaims,
+            UserDetails userDetails,
+            long expiration
+    ) {
+        return Jwts
+                .builder()
+                .setClaims(extraClaims)
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(getKey(), SignatureAlgorithm.HS256)
+                .compact();
     }
 
     // metodo generico:

@@ -1,5 +1,6 @@
 package com.Henry.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +17,7 @@ public class Profiles {
     private int id_profile;
     @OneToOne
     @JoinColumn(name = "id_user",referencedColumnName = "id_user")
+    @JsonBackReference
     private Users user;
     @Column(name = "first_name",nullable = false)
     private String first_name;

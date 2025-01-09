@@ -4,7 +4,8 @@ import com.Henry.dao.users.UsersRepository;
 import com.Henry.dto.users.UsersDTO;
 import com.Henry.entities.Users;
 import com.Henry.mapper.UsersMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.Henry.mapper.any.Mapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,30 +13,19 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService{
 
     private final UsersRepository repository;
+    private final Mapper mapper;
 
-    @Autowired
-    public UsersServiceImpl(UsersRepository repository){
-        this.repository =repository;
-    }
-
-
-    public UsersDTO convertToDTO(Users user) {
-        return UsersDTO.builder()
-                .email(user.getEmail())
-                .nickname(user.getNickname())
-                .password(user.getPassword())
-                .build();
-    }
 
     @Override
     public List<UsersDTO> findAll() {
         List<Users> users = repository.findAll();
 
         return users.stream()
-                .map(this::convertToDTO)
+                .map(this.mapper::convertUserToDTO)
                 .collect(Collectors.toList());
     }
 

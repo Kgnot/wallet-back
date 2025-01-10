@@ -2,7 +2,6 @@ package com.Henry.auth.authController;
 
 
 import com.Henry.auth.services.AuthService;
-import com.Henry.auth.utils.AuthResponse;
 import com.Henry.auth.utils.LoginRequest;
 import com.Henry.auth.utils.RegisterRequest;
 import com.Henry.security.util.CookieUtil;
@@ -65,7 +64,7 @@ public class AuthController {
 
     @GetMapping("logout")
     public ResponseEntity<?> logout(HttpServletResponse response) {
-        cookieUtil.clear(response, cookieName);
+        cookieUtil.clear(response, cookieName,domain);
 
         return ResponseEntity.ok().body("\"message:\": \"Logout\" ");
     }

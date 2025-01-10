@@ -1,6 +1,5 @@
 package com.Henry.security.util;
 
-
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
@@ -8,8 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CookieUtil {
 
-
-    public  void create(
+    public void create(
             HttpServletResponse http,
             String value,
             String name,
@@ -21,15 +19,40 @@ public class CookieUtil {
         cookie.setSecure(secure);
         cookie.setHttpOnly(true);
         cookie.setMaxAge(exp);
-        cookie.setDomain(domain);
         cookie.setPath("/");
-        http.addCookie(cookie);
+        cookie.setDomain(domain);
+
+        // Agregar cookie al encabezado manualmente con SameSite
+        String sameSite = "None"; // Configurar según tus necesidades (None, Lax, Strict)
+        String cookieHeader = String.format(
+                "%s=%s; Max-Age=%d; Path=%s; Domain=%s; HttpOnly; Secure; SameSite=%s",
+                cookie.getName(),
+                cookie.getValue(),
+                cookie.getMaxAge(),
+                cookie.getPath(),
+                cookie.getDomain(),
+                sameSite
+        );
+
+        http.addHeader("Set-Cookie", cookieHeader);
     }
 
-    public void clear(HttpServletResponse http, String name) {
+    public void clear(HttpServletResponse http, String name, String domain) {
         Cookie cookie = new Cookie(name, null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
-        http.addCookie(cookie);
+        cookie.setDomain(domain);
+
+        // Eliminar cookie manualmente
+        String sameSite = "None"; // Configurar según sea necesario
+        String cookieHeader = String.format(
+                "%s=; Max-Age=0; Path=%s; Domain=%s; HttpOnly; Secure; SameSite=%s",
+                cookie.getName(),
+                cookie.getPath(),
+                cookie.getDomain(),
+                sameSite
+        );
+
+        http.addHeader("Set-Cookie", cookieHeader);
     }
 }

@@ -72,6 +72,7 @@ public class AuthController {
 
     private boolean isCookiePresent(HttpServletRequest request) {
         Cookie cookie = WebUtils.getCookie(request, cookieName);
+        System.out.println("Cooki obetnida :p"+cookie+" con nombre: "+cookieName);
         return cookie == null ? false : true;
     }
 

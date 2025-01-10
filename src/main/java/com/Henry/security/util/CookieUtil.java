@@ -20,20 +20,17 @@ public class CookieUtil {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(exp);
         cookie.setPath("/");
-//        cookie.setDomain(domain);
 
         String sameSite = "None"; // None
         String cookieHeader = String.format(
-//                "%s=%s; Max-Age=%d; Path=%s; Domain=%s; HttpOnly; Secure; SameSite=%s",
-                "%s=%s; Max-Age=%d; Path=%s; HttpOnly; Secure; SameSite=%s",
+                "%s=%s; Max-Age=%d; Path=%s; HttpOnly; %s; SameSite=%s",
                 cookie.getName(),
                 cookie.getValue(),
                 cookie.getMaxAge(),
                 cookie.getPath(),
-//                cookie.getDomain(),
+                secure ? "Secure" : "",
                 sameSite
         );
-//        http.addCookie(cookie);
         http.addHeader("Set-Cookie", cookieHeader);
     }
 
@@ -41,18 +38,7 @@ public class CookieUtil {
         Cookie cookie = new Cookie(name, null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
-//        cookie.setDomain(domain);
 
-        String sameSite = "None"; // None
-        String cookieHeader = String.format(
-//                "%s=; Max-Age=0; Path=%s; Domain=%s; HttpOnly; Secure; SameSite=%s",
-                "%s=%s; Max-Age=%d; Path=%s; HttpOnly; Secure; SameSite=%s",
-                cookie.getName(),
-                cookie.getPath(),
-                cookie.getDomain(),
-                sameSite
-        );
-//        http.addCookie(cookie);
-        http.addHeader("Set-Cookie", cookieHeader);
+        http.addCookie(cookie);
     }
 }

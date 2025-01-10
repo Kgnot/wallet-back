@@ -70,8 +70,8 @@ public class AuthController {
     }
 
 
-    private boolean isCookiePresent(HttpServletRequest response) {
-        Cookie cookie = WebUtils.getCookie(response, cookieName);
+    private boolean isCookiePresent(HttpServletRequest request) {
+        Cookie cookie = WebUtils.getCookie(request, cookieName);
         return cookie == null ? false : true;
     }
 

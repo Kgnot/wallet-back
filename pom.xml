@@ -44,11 +44,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- PostgreSQL -->
+        <!-- PostgresSQL -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.6.0</version> <!-- Usa la última versión disponible -->
+            <version>42.7.2</version> <!-- Usa la última versión disponible -->
         </dependency>
 
         <!-- JWT -->

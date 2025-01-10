@@ -22,8 +22,7 @@ public class CookieUtil {
         cookie.setPath("/");
         cookie.setDomain(domain);
 
-        // Agregar cookie al encabezado manualmente con SameSite
-        String sameSite = "None"; // Configurar según tus necesidades (None, Lax, Strict)
+        String sameSite = "None"; // None
         String cookieHeader = String.format(
                 "%s=%s; Max-Age=%d; Path=%s; Domain=%s; HttpOnly; Secure; SameSite=%s",
                 cookie.getName(),
@@ -43,8 +42,7 @@ public class CookieUtil {
         cookie.setPath("/");
         cookie.setDomain(domain);
 
-        // Eliminar cookie manualmente
-        String sameSite = "None"; // Configurar según sea necesario
+        String sameSite = "None"; // None
         String cookieHeader = String.format(
                 "%s=; Max-Age=0; Path=%s; Domain=%s; HttpOnly; Secure; SameSite=%s",
                 cookie.getName(),

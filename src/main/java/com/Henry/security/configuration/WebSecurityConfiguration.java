@@ -28,7 +28,6 @@ public class WebSecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable) // reemplazando a 'csrf -> csrf.disable()' que es lo que se coloca de normal |  y mirar porque uso tokens y ayudaria contra ataques CSRF
-                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/**",
                                 "/wallets/**",

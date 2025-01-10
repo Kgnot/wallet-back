@@ -11,7 +11,6 @@ public class CookieUtil {
             HttpServletResponse http,
             String value,
             String name,
-            String domain,
             int exp,
             boolean secure
     ) {
@@ -20,18 +19,17 @@ public class CookieUtil {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(exp);
         cookie.setPath("/");
-        cookie.setSecure(secure);
 
-        String sameSite = "None"; // None
+        String sameSite = "None";
         String cookieHeader = String.format(
-                "%s=%s; Max-Age=%d; Path=%s; HttpOnly; %s; SameSite=%s",
+                "%s=%s; Max-Age=%d; Path=%s; HttpOnly; Secure; SameSite=%s",
                 cookie.getName(),
                 cookie.getValue(),
                 cookie.getMaxAge(),
                 cookie.getPath(),
-                secure ? "Secure" : "",
                 sameSite
         );
+        http.addCookie(cookie);
         http.addHeader("Set-Cookie", cookieHeader);
     }
 

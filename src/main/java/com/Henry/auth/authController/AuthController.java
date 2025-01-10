@@ -66,7 +66,7 @@ public class AuthController {
     public ResponseEntity<?> logout(HttpServletResponse response) {
         cookieUtil.clear(response, cookieName,domain);
 
-        return ResponseEntity.ok().body("\"message:\": \"Logout\" ");
+        return ResponseEntity.ok().body("{\"message:\": \"Logout\" }");
     }
 
 //

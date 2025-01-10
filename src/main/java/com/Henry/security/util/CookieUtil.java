@@ -32,7 +32,7 @@ public class CookieUtil {
                 cookie.getDomain(),
                 sameSite
         );
-
+        http.addCookie(cookie);
         http.addHeader("Set-Cookie", cookieHeader);
     }
 
@@ -50,7 +50,7 @@ public class CookieUtil {
                 cookie.getDomain(),
                 sameSite
         );
-
+        http.addCookie(cookie);
         http.addHeader("Set-Cookie", cookieHeader);
     }
 }

@@ -13,7 +13,7 @@ spring:
     open-in-view: false
     show-sql: true
 jwt:
-  expiration: 43200000
+  expiration: ${JWT_EXPIRATION}
   secret:
     key: ${JWT_SECRET_KEY}
   cookie:
@@ -24,14 +24,5 @@ jwt:
 
 domain: ${DOMAIN}
 
-
-logging:
-  level:
-    org:
-      springframework:
-        security:
-          config:
-            annotation:
-              authentication:
-                configuration:
-                  InitializeUserDetailsBeanManagerConfigurer: ERROR
+server:
+  port: 80

@@ -37,7 +37,6 @@ public class AuthController {
                 response,
                 jwt,
                 cookieName,
-                domain,
                 exp,
                 true
         );
@@ -47,33 +46,34 @@ public class AuthController {
     @PostMapping("register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request, HttpServletResponse response) {
         String jwt = authService.register(request).getToken();
+        //cookieUtil.clear(response, cookieName,domain); // primero limpiamos
+
         cookieUtil.create(
                 response,
                 jwt,
                 cookieName,
-                domain,
                 exp,
                 true);
         return ResponseEntity.ok().body("{\"message\": \"sign in successful\"}");
     } // Estó también toca cambiarlo.
 
     @GetMapping("check-auth")
-    public boolean checkAuth(HttpServletRequest request) {
-        return isCookiePresent(request);//? ResponseEntity.ok("Authenticated") : ResponseEntity.status(401).body("Not Authenticated")
+    public boolean checkAuth() {
+        return cookieUtil.isCookiePresent();//? ResponseEntity.ok("Authenticated") : ResponseEntity.status(401).body("Not Authenticated")
     }
 
     @GetMapping("logout")
     public ResponseEntity<?> logout(HttpServletResponse response) {
         cookieUtil.clear(response, cookieName,domain);
 
-        return ResponseEntity.ok().body("\"message:\": \"Logout\" ");
+        return ResponseEntity.ok().body("{\"message:\": \"Logout\" }");
     }
 
-
-    private boolean isCookiePresent(HttpServletRequest response) {
-        Cookie cookie = WebUtils.getCookie(response, cookieName);
-        return cookie == null ? false : true;
-    }
+//
+//    private boolean isCookiePresent(HttpServletRequest request) {
+//        Cookie cookie = WebUtils.getCookie(request, cookieName);
+//        return cookie == null ? false : true;
+//    }
 
 
 }

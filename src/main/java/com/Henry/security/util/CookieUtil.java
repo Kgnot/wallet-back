@@ -7,11 +7,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class CookieUtil {
 
+    private boolean isPresent =false;
+
     public void create(
             HttpServletResponse http,
             String value,
             String name,
-            String domain,
             int exp,
             boolean secure
     ) {
@@ -20,39 +21,32 @@ public class CookieUtil {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(exp);
         cookie.setPath("/");
-        cookie.setDomain(domain);
 
-        // Agregar cookie al encabezado manualmente con SameSite
-        String sameSite = "None"; // Configurar según tus necesidades (None, Lax, Strict)
+        String sameSite = "None";
         String cookieHeader = String.format(
-                "%s=%s; Max-Age=%d; Path=%s; Domain=%s; HttpOnly; Secure; SameSite=%s",
+                "%s=%s; Max-Age=%d; Path=%s; HttpOnly; Secure; SameSite=%s",
                 cookie.getName(),
                 cookie.getValue(),
                 cookie.getMaxAge(),
                 cookie.getPath(),
-                cookie.getDomain(),
                 sameSite
         );
-
+        http.addCookie(cookie);
         http.addHeader("Set-Cookie", cookieHeader);
+        isPresent = true;
     }
 
     public void clear(HttpServletResponse http, String name, String domain) {
         Cookie cookie = new Cookie(name, null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
-        cookie.setDomain(domain);
 
-        // Eliminar cookie manualmente
-        String sameSite = "None"; // Configurar según sea necesario
-        String cookieHeader = String.format(
-                "%s=; Max-Age=0; Path=%s; Domain=%s; HttpOnly; Secure; SameSite=%s",
-                cookie.getName(),
-                cookie.getPath(),
-                cookie.getDomain(),
-                sameSite
-        );
+        http.addCookie(cookie);
+        isPresent = false;
 
-        http.addHeader("Set-Cookie", cookieHeader);
+    }
+
+    public boolean isCookiePresent(){
+        return isPresent;
     }
 }

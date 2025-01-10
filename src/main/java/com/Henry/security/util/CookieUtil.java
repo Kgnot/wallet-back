@@ -20,6 +20,7 @@ public class CookieUtil {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(exp);
         cookie.setPath("/");
+        cookie.setSecure(secure);
 
         String sameSite = "None"; // None
         String cookieHeader = String.format(

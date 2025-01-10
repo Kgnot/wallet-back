@@ -47,7 +47,7 @@ public class AuthController {
     @PostMapping("register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request, HttpServletResponse response) {
         String jwt = authService.register(request).getToken();
-        cookieUtil.clear(response, cookieName,domain); // primero limpiamos
+        //cookieUtil.clear(response, cookieName,domain); // primero limpiamos
 
         cookieUtil.create(
                 response,

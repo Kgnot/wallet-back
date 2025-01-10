@@ -37,7 +37,6 @@ public class AuthController {
                 response,
                 jwt,
                 cookieName,
-                domain,
                 exp,
                 true
         );
@@ -53,7 +52,6 @@ public class AuthController {
                 response,
                 jwt,
                 cookieName,
-                domain,
                 exp,
                 true);
         return ResponseEntity.ok().body("{\"message\": \"sign in successful\"}");

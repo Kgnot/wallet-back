@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CookieUtil {
 
+    private boolean isPresent =false;
+
     public void create(
             HttpServletResponse http,
             String value,
@@ -31,6 +33,7 @@ public class CookieUtil {
         );
         http.addCookie(cookie);
         http.addHeader("Set-Cookie", cookieHeader);
+        isPresent = true;
     }
 
     public void clear(HttpServletResponse http, String name, String domain) {
@@ -39,5 +42,11 @@ public class CookieUtil {
         cookie.setPath("/");
 
         http.addCookie(cookie);
+        isPresent = false;
+
+    }
+
+    public boolean isCookiePresent(){
+        return isPresent;
     }
 }

@@ -58,8 +58,8 @@ public class AuthController {
     } // Estó también toca cambiarlo.
 
     @GetMapping("check-auth")
-    public boolean checkAuth(HttpServletRequest request) {
-        return isCookiePresent(request);//? ResponseEntity.ok("Authenticated") : ResponseEntity.status(401).body("Not Authenticated")
+    public boolean checkAuth() {
+        return cookieUtil.isCookiePresent();//? ResponseEntity.ok("Authenticated") : ResponseEntity.status(401).body("Not Authenticated")
     }
 
     @GetMapping("logout")
@@ -69,12 +69,11 @@ public class AuthController {
         return ResponseEntity.ok().body("\"message:\": \"Logout\" ");
     }
 
-
-    private boolean isCookiePresent(HttpServletRequest request) {
-        Cookie cookie = WebUtils.getCookie(request, cookieName);
-        System.out.println("Cooki obetnida :p"+cookie+" con nombre: "+cookieName);
-        return cookie == null ? false : true;
-    }
+//
+//    private boolean isCookiePresent(HttpServletRequest request) {
+//        Cookie cookie = WebUtils.getCookie(request, cookieName);
+//        return cookie == null ? false : true;
+//    }
 
 
 }
